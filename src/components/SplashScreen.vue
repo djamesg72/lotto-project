@@ -1,10 +1,26 @@
 <template>
   <div @click="hideDiv" v-if="isVisible" id="SplashScreenWrapper">
     <div class="vertical-split">
-      <LottoBall :ballNo="ballNumbers[0]" :ballSize="ballSize"></LottoBall>
-      <LottoBall :ballNo="ballNumbers[1]" :ballSize="ballSize"></LottoBall>
-      <LottoBall :ballNo="ballNumbers[2]" :ballSize="ballSize"></LottoBall>
-      <LottoBall :ballNo="ballNumbers[3]" :ballSize="ballSize"></LottoBall>
+      <LottoBall
+        :ballColor="ballColors[0]"
+        :ballNo="ballNumbers[0]"
+        :ballSize="ballSize"
+      ></LottoBall>
+      <LottoBall
+        :ballColor="ballColors[1]"
+        :ballNo="ballNumbers[1]"
+        :ballSize="ballSize"
+      ></LottoBall>
+      <LottoBall
+        :ballColor="ballColors[2]"
+        :ballNo="ballNumbers[2]"
+        :ballSize="ballSize"
+      ></LottoBall>
+      <LottoBall
+        :ballColor="ballColors[3]"
+        :ballNo="ballNumbers[3]"
+        :ballSize="ballSize"
+      ></LottoBall>
     </div>
     <div class="vertical-split">
       <div id="gameTitle"><span id="playButton">play</span><br />pick 1</div>
@@ -29,6 +45,12 @@ export default defineComponent({
         Math.floor(Math.random() * 10) + 1,
         Math.floor(Math.random() * 10) + 1,
         Math.floor(Math.random() * 10) + 1,
+      ],
+      ballColors: [
+        Math.floor(Math.random() * 7) + 1,
+        Math.floor(Math.random() * 7) + 1,
+        Math.floor(Math.random() * 7) + 1,
+        Math.floor(Math.random() * 7) + 1,
       ],
       isVisible: true,
     };
@@ -73,7 +95,7 @@ export default defineComponent({
 }
 
 #SplashScreenWrapper {
-  position: relative;
+  position: absolute;
   width: 100%;
   height: 100%;
   display: flex;
@@ -105,6 +127,8 @@ export default defineComponent({
   font-family: "Poetsen One";
   text-shadow: 5px 5px 5px black;
   transition: all 200ms ease-in-out;
+  user-select: none;
+  color: white;
 }
 
 #gameTitle:hover {

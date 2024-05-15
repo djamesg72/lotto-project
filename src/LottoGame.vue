@@ -1,7 +1,8 @@
 <template>
-  <div class="hello"></div>
-  <SplashScreen></SplashScreen>
-  <UserHud></UserHud>
+  <div class="lotto-game">
+    <UserHud></UserHud>
+    <SplashScreen></SplashScreen>
+  </div>
 </template>
 
 <script lang="ts">
@@ -24,9 +25,14 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-template {
+.lotto-game {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  align-items: start;
+  justify-content: center;
 }
 </style>

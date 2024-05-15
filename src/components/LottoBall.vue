@@ -2,10 +2,7 @@
   <div
     :style="{
       '--ball-size': ballSize + 'px',
-      'background-color':
-        Object.keys(BALLCOLORS)[
-          Math.floor(Math.random() * Object.keys(BALLCOLORS).length)
-        ],
+      'background-color': Object.keys(BALLCOLORS)[ballColor],
     }"
     class="lotto-ball"
   >
@@ -28,6 +25,10 @@ export default defineComponent({
     ballNo: {
       type: Number,
       required: true, // Ensure ballNo is required
+    },
+    ballColor: {
+      type: Number,
+      required: true,
     },
     ballSize: Number,
   },
@@ -53,7 +54,13 @@ export default defineComponent({
   margin-right: calc(var(--ball-size) / -12);
   position: relative;
   overflow: hidden;
-  border: calc(var(--ball-size) / 100) solid gray;
+  // border: calc(var(--ball-size) / 100) solid gray;
+  box-shadow: inset -2px -2px 20px rgba(0, 0, 0, 0.6);
+  background-image: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.1) 0%,
+    transparent 60%
+  );
 }
 
 .inner-ball {

@@ -1,5 +1,8 @@
 <template>
-  <LottoGame msg="Welcome to Your Vue.js + TypeScript App" />
+  <LottoGame
+    v-if="domContentLoaded"
+    msg="Welcome to Your Vue.js + TypeScript App"
+  />
 </template>
 
 <script lang="ts">
@@ -10,6 +13,21 @@ export default defineComponent({
   name: "App",
   components: {
     LottoGame,
+  },
+  data() {
+    return {
+      domContentLoaded: false,
+    };
+  },
+  mounted() {
+    // Listen for DOMContentLoaded event
+    document.addEventListener("DOMContentLoaded", this.handleDOMContentLoaded);
+  },
+  methods: {
+    handleDOMContentLoaded() {
+      // Update domContentLoaded data property when DOMContentLoaded event occurs
+      this.domContentLoaded = true;
+    },
   },
 });
 </script>
@@ -45,7 +63,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: rebeccapurple;
+  background-color: hsl(215, 73%, 45%);
   // margin-top: 60px;
 }
 </style>

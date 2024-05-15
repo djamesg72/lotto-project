@@ -1,7 +1,10 @@
 export const BALLCOLORS = {
-  ORANGE: "#ffbe0b",
-  ORANGERED: "#fb5607",
-  PINK: "#ff006e",
-  PURPLE: "#8338ec",
-  BLUE: "#3a86ff",
+  ORANGE: "#DD7810",
+  YELLOW: "#F7E11C",
+  CYAN: "#09C7D7",
+  PINK: "#E509E7",
+  GREEN: "#17CF15",
+  RED: "#F01815",
+  PURPLE: "#99165C",
+  BLUE: "#4244F7",
 };
