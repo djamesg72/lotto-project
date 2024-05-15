@@ -1,22 +1,10 @@
 <template>
-  <div id="SplashScreenWrapper">
+  <div @click="hideDiv" v-if="isVisible" id="SplashScreenWrapper">
     <div class="vertical-split">
-      <LottoBall
-        :ballNo="Math.floor(Math.random() * 10) + 1"
-        :ballSize="ballSize"
-      ></LottoBall>
-      <LottoBall
-        :ballNo="Math.floor(Math.random() * 10) + 1"
-        :ballSize="ballSize"
-      ></LottoBall>
-      <LottoBall
-        :ballNo="Math.floor(Math.random() * 10) + 1"
-        :ballSize="ballSize"
-      ></LottoBall>
-      <LottoBall
-        :ballNo="Math.floor(Math.random() * 10) + 1"
-        :ballSize="ballSize"
-      ></LottoBall>
+      <LottoBall :ballNo="ballNumbers[0]" :ballSize="ballSize"></LottoBall>
+      <LottoBall :ballNo="ballNumbers[1]" :ballSize="ballSize"></LottoBall>
+      <LottoBall :ballNo="ballNumbers[2]" :ballSize="ballSize"></LottoBall>
+      <LottoBall :ballNo="ballNumbers[3]" :ballSize="ballSize"></LottoBall>
     </div>
     <div class="vertical-split">
       <div id="gameTitle"><span id="playButton">play</span><br />pick 1</div>
@@ -36,6 +24,13 @@ export default defineComponent({
   data() {
     return {
       ballSize: this.calculateBallSize(),
+      ballNumbers: [
+        Math.floor(Math.random() * 10) + 1,
+        Math.floor(Math.random() * 10) + 1,
+        Math.floor(Math.random() * 10) + 1,
+        Math.floor(Math.random() * 10) + 1,
+      ],
+      isVisible: true,
     };
   },
   mounted() {
@@ -58,10 +53,25 @@ export default defineComponent({
     handleResize() {
       this.ballSize = this.calculateBallSize(); // Update ballSize on window resize
     },
+    hideDiv() {
+      this.isVisible = false;
+    },
   },
 });
 </script>
 <style scoped lang="scss">
+@keyframes splashScreenAnimation {
+  0% {
+    background-position-x: 0;
+  }
+  80% {
+    background-position-x: 10vw;
+  }
+  100% {
+    background-position-x: 10vw;
+  }
+}
+
 #SplashScreenWrapper {
   position: relative;
   width: 100%;
@@ -71,8 +81,14 @@ export default defineComponent({
   justify-content: space-evenly;
   align-items: center;
   color: white;
-  background-color: rgb(0, 109, 128);
+  background-color: rgb(41, 117, 222);
   cursor: pointer;
+  background-image: url(../assets/visual/ball.svg);
+  background-size: 5vw;
+  background-position-x: 0;
+  background-position-y: 0.5vw;
+  backdrop-filter: invert(1);
+  animation: splashScreenAnimation 1s ease-in-out infinite;
 }
 .vertical-split {
   height: 40%;
@@ -92,7 +108,7 @@ export default defineComponent({
 }
 
 #gameTitle:hover {
-  scale: 1.3;
+  scale: 1.2;
   color: gold;
 }
 

@@ -2,7 +2,10 @@
   <div
     :style="{
       '--ball-size': ballSize + 'px',
-      'background-color': ballColors[Math.floor(Math.random() * 6)],
+      'background-color':
+        Object.keys(BALLCOLORS)[
+          Math.floor(Math.random() * Object.keys(BALLCOLORS).length)
+        ],
     }"
     class="lotto-ball"
   >
@@ -18,7 +21,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 // import * as PIXI from "pixi.js";
-
+import { BALLCOLORS } from "@/statics/enums";
 export default defineComponent({
   name: "LottoBall",
   props: {
@@ -29,9 +32,7 @@ export default defineComponent({
     ballSize: Number,
   },
   data() {
-    return {
-      ballColors: ["red", "purple", "green", "orange", "blue", "gold"],
-    };
+    return { BALLCOLORS }; // Make BALLCOLORS available to the template
   },
 });
 </script>
@@ -52,9 +53,7 @@ export default defineComponent({
   margin-right: calc(var(--ball-size) / -12);
   position: relative;
   overflow: hidden;
-  border: calc(var(--ball-size) / 100) solid white;
-  box-shadow: inset calc(var(--ball-size) / 10) calc(var(--ball-size) / 7)
-    calc(var(--ball-size) / 5) rgba(255, 255, 255, 0.3);
+  border: calc(var(--ball-size) / 100) solid gray;
 }
 
 .inner-ball {

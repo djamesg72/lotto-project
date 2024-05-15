@@ -1,12 +1,14 @@
 <template>
   <div class="hello"></div>
   <SplashScreen></SplashScreen>
+  <UserHud></UserHud>
 </template>
 
 <script lang="ts">
 import gsap from "gsap";
 import { defineComponent } from "vue";
 import SplashScreen from "@/components/SplashScreen.vue";
+import UserHud from "./components/UserHud.vue";
 // import * as PIXI from "pixi.js";
 
 // gsap.from(".header", { duration: 1, y: "-100%", ease: "bounce" });
@@ -15,6 +17,7 @@ export default defineComponent({
   name: "LottoGame",
   components: {
     SplashScreen,
+    UserHud,
   },
 });
 </script>
