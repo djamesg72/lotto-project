@@ -2,7 +2,8 @@
   <div
     :style="{
       '--ball-size': ballSize + 'px',
-      'background-color': Object.keys(BALLCOLORS)[ballColor],
+      'background-color':
+        Object.keys(BALLCOLORS)[ballColor % Object.keys(BALLCOLORS).length],
     }"
     class="lotto-ball"
   >

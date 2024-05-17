@@ -3,17 +3,15 @@
     <div id="betBalanceWrapper">
       <div class="bb-wrapper" id="balanceAmount">
         <div class="bb-title">Balance:</div>
-        {{ balanceAmount + " " + betCurrency }}
+        <div class="bb-amount">{{ balanceAmount + " " + betCurrency }}</div>
       </div>
       <div class="bb-wrapper" id="betAmount">
         <div class="bb-title">Bet:</div>
         {{ betAmount + " " + betCurrency }}
       </div>
     </div>
-    <div v-if="!isBet" @click="toggleBet" class="play-button" id="betButton">
-      Place Bet
-    </div>
-    <div v-else @click="toggleBet" class="play-button" id="cancelButton">
+    <div @click="toggleBet" class="play-button" id="betButton">Place Bet</div>
+    <div @click="toggleBet" class="play-button invisible" id="cancelButton">
       Cancel Bet
     </div>
     <div
@@ -34,18 +32,30 @@ export default defineComponent({
   name: "UserHud",
   data() {
     return {
-      isBet: data.isBet,
       soundOn: false,
       betAmount: 1,
-      balanceAmount: 3,
-      betCurrency: "EUR",
+      balanceAmount: data.playerBalance,
+      betCurrency: data.currency,
     };
   },
   methods: {
     toggleBet() {
-      data.isBet = !data.isBet;
-      this.isBet = data.isBet;
-      console.log(data.isBet);
+      if (
+        data.chosenNumber != 0 &&
+        data.playerBalance > 0 &&
+        !data.betDisabled
+      ) {
+        data.isBet = !data.isBet;
+        if (!data.isBet) {
+          document.getElementById("betButton")!.classList.remove("invisible");
+          document.getElementById("cancelButton")!.classList.add("invisible");
+        } else {
+          document.getElementById("betButton")!.classList.add("invisible");
+          document
+            .getElementById("cancelButton")!
+            .classList.remove("invisible");
+        }
+      }
     },
     toggleSound() {
       data.soundOn = !data.soundOn;
@@ -56,17 +66,20 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@import "@/styles/mixins.scss";
+@import "@/styles/variables.scss";
+
 .user-hud-wrapper {
-  position: absolute;
+  position: relative;
   bottom: 0;
   height: 100px;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(black, 0.5);
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: row;
-  box-shadow: 0 -5px 2px rgba($color: black, $alpha: 0.5);
+  // box-shadow: 0 -5px 2px rgba($color: black, $alpha: 0.5);
   font-family: "Poetsen One";
 }
 
@@ -84,8 +97,13 @@ export default defineComponent({
   cursor: pointer;
   user-select: none;
   color: white;
-  font-size: 20px;
   transition: all 200ms ease-in-out;
+  @include desktop {
+    font-size: $desktop-font-size;
+  }
+  @include mobile {
+    font-size: $mobile-font-size;
+  }
 }
 #betButton {
   background-color: rgba($color: gold, $alpha: 0.5);
@@ -126,12 +144,17 @@ export default defineComponent({
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  @include desktop {
+    font-size: $desktop-font-size;
+  }
+  @include mobile {
+    font-size: $mobile-font-size;
+  }
 }
 
 .bb-title {
-  font-size: 20px;
   width: 90px;
-  height: 25px;
+  height: fit-content;
   background-color: white;
   color: black;
   margin-right: 10px;
@@ -160,5 +183,14 @@ export default defineComponent({
 
 #soundIsOn {
   background-image: url(../assets/visual/sound-off.svg);
+}
+
+.invisible {
+  display: none !important;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 </style>

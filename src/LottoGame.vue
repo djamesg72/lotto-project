@@ -1,24 +1,30 @@
 <template>
   <div class="lotto-game">
+    <TimeLine></TimeLine>
+    <GameAnimation></GameAnimation>
+    <BallPool></BallPool>
     <UserHud></UserHud>
     <SplashScreen></SplashScreen>
   </div>
 </template>
 
 <script lang="ts">
-import gsap from "gsap";
 import { defineComponent } from "vue";
 import SplashScreen from "@/components/SplashScreen.vue";
-import UserHud from "./components/UserHud.vue";
+import UserHud from "@/components/UserHud.vue";
+import BallPool from "@/components/BallPool.vue";
+import TimeLine from "@/components/TimeLine.vue";
+import GameAnimation from "@/components/GameAnimation.vue";
 // import * as PIXI from "pixi.js";
-
-// gsap.from(".header", { duration: 1, y: "-100%", ease: "bounce" });
 
 export default defineComponent({
   name: "LottoGame",
   components: {
     SplashScreen,
     UserHud,
+    BallPool,
+    TimeLine,
+    GameAnimation,
   },
 });
 </script>
@@ -27,12 +33,11 @@ export default defineComponent({
 <style scoped lang="scss">
 .lotto-game {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   position: relative;
   height: 100%;
   width: 100%;
-  align-items: start;
-  justify-content: center;
+  align-items: center;
+  justify-content: end;
 }
 </style>

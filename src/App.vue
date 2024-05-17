@@ -34,6 +34,11 @@ export default defineComponent({
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap");
+@import "@/styles/mixins.scss";
+@import "@/styles/variables.scss";
+:root {
+  --gradient-intensity: 0%;
+}
 
 .poetsen-one-regular {
   font-family: "Poetsen One", sans-serif;
@@ -57,13 +62,18 @@ body {
   padding: 0;
   width: 100vw;
   max-height: 100vh;
-  aspect-ratio: 16 / 9;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   background-color: hsl(215, 73%, 45%);
+  @include desktop {
+    aspect-ratio: 16 / 9;
+  }
+  @include mobile {
+    height: 100vh;
+  }
   // margin-top: 60px;
 }
 </style>
