@@ -16,12 +16,6 @@
         :ballSize="100"
         id="winningNumberBall"
       ></LottoBall>
-      <canvas
-        id="winAnimationCanvas"
-        class="invisible"
-        ref="canvas"
-        style="background: transparent"
-      ></canvas>
       <div class="win-dialogue invisible">
         Congratulations<br />You Won<br /><span id="winningAmountSpan"></span>
       </div>
@@ -32,7 +26,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import LottoBall from "./LottoBall.vue";
-import gsap from "gsap";
+import { Game } from "@/main";
 
 export default defineComponent({
   name: "GameAnimation",
@@ -40,6 +34,7 @@ export default defineComponent({
     LottoBall,
   },
   mounted() {
+    const game = new Game();
     const balls = document.querySelectorAll(
       ".drum-ball"
     ) as unknown as HTMLDivElement[];

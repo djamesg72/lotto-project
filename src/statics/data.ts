@@ -3,6 +3,7 @@ export default {
   isBet: false,
   soundOn: false,
   playerBalance: 3,
+  bettingInterval: 15,
   betAmount: 1,
   chosenNumber: 0,
   currency: "EUR",

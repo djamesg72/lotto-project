@@ -57,6 +57,16 @@ body {
   align-items: center;
 }
 
+.canvas {
+  aspect-ratio: unset;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
 #app {
   margin: 0;
   padding: 0;

@@ -2,19 +2,28 @@ import { createApp, ref } from "vue";
 import App from "./App.vue";
 import data from "./statics/data";
 import gsap from "gsap";
-import { particleSystem } from "./emitter";
+import { ParticleSystem } from "./emitter";
 
 // createApp(App).mount("#app");
 const app = createApp(App).mount("#app");
 
 export class Game {
+  private particleSystem;
   constructor() {
     this.setBettingTimer();
+    this.particleSystem = new ParticleSystem();
+    // document
+    //   .getElementById("winningNumberScene")
+    //   ?.classList.remove("invisible");
+    // this.particleSystem.trigger();
+    // setTimeout(() => {
+    //   this.playWinAnimation(2);
+    // }, 2000);
   }
 
   private async setBettingTimer() {
     gsap.to("#timeLineFill", {
-      duration: 15,
+      duration: data.bettingInterval,
       width: "0%",
       ease: "slow(0.5,0.4,false)",
     });
@@ -44,7 +53,7 @@ export class Game {
       } else {
         this.ResetScene();
       }
-    }, 15000);
+    }, data.bettingInterval * 1000);
   }
 
   private async startGameRound(): Promise<number> {
@@ -112,7 +121,7 @@ export class Game {
       .getElementById("winAnimationCanvas")
       ?.classList.remove("invisible");
     document.querySelector(".win-dialogue")?.classList.remove("invisible");
-    particleSystem.trigger();
+    this.particleSystem.trigger();
   }
 
   private updateBalance() {
@@ -125,7 +134,3 @@ export class Game {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }
-
-addEventListener("DOMContentLoaded", () => {
-  const game = new Game();
-});
